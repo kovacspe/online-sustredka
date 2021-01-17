@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'materializecssform',
+    'quiz.apps.QuizConfig',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [

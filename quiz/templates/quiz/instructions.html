@@ -1,0 +1,13 @@
+{% extends "quiz/base.html" %}
+
+{% block content %}
+
+<h3>Ahoj {{player.nickname}},</h3>
+Tu su pravidla.
+
+<form action="/quiz/start-game/{{pk}}/" method='POST'>
+    {% csrf_token %}
+    <button class="waves-effect waves-light btn" type='submit'>Začni</button>
+</form>
+
+{% endblock content %}

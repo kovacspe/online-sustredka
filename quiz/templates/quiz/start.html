@@ -1,0 +1,12 @@
+{% extends "quiz/base.html" %}
+{% load crispy_forms_tags %}
+{% load materializecss %}
+{% block content %}
+Vitajte na stromáckom kvíze. Zdajte svoj email pod ktorým ste sa prihlasovali na online sústredka
+<form action="start" method="post">
+    {% csrf_token %}
+    {{ form |materializecss }}
+    <input type="submit" value="Štart">
+</form>
+
+{% endblock content %}

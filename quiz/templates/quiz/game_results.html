@@ -1,0 +1,15 @@
+{% extends "quiz/base.html" %}
+
+{% block content %}
+
+<h3>Ahoj {{player.nickname}},</h3>
+<p>
+Získal si {{points}} z {{max_points}} bodov a tvoj čas bol {{time}} s.
+</p>
+<div class='row'>
+<a class="waves-effect waves-light btn" href='/quiz/results'>Výsledky</a>
+<a class="waves-effect waves-light btn" href='/quiz/results'>nová hra</a>
+</div>
+
+
+{% endblock content %}
