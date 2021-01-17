@@ -72,7 +72,6 @@ def results(request):
     result_board = []
     current_player = None
     for rec in records:
-        print(rec.player,',',rec.points,',',rec.time)
         if rec.player!=current_player: 
             result_board.append(rec)
             current_player = rec.player

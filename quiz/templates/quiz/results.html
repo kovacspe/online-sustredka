@@ -1,29 +1,39 @@
 {% extends "quiz/base.html" %}
 
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Poradie</h2>
+        </div>
+        <div class="col-sm-6">
+            <a class="waves-effect waves-light btn" href='/quiz/start'>nová hra</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Poradie</th>
+                <th>Účastník</th>
+                <th>Body</th>
+                <th>Čas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for res in results %}
+            <tr>
+                <td>{{forloop.counter}}.</td>
+                <td>{{res.player.nickname}}</td>
+                <td>{{res.points}}</td>
+                <td>{{res.time}} s</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<h2>Poradie</h2>
-<table class="striped">
-    <thead>
-        <tr>
-            <th>Poradie</th>
-            <th>Účastník</th>
-            <th>Body</th>
-            <th>Čas</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for res in results %}
-        <tr>
-            <td>{{forloop.counter}}.</td>
-            <td>{{res.player.nickname}}</td>
-            <td>{{res.points}}</td>
-            <td>{{res.time}} s</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+</div>
 
 
 {% endblock content %}

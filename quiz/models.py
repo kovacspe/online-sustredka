@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 import random
+import unidecode
+
 
 class QuestionTag(models.Model):
     class Meta:
@@ -86,7 +88,7 @@ class GameRecord(models.Model):
 
     def answer_and_get_next(self,answer):
         q = self.questions.filter(order=self.current_question_n).first()
-        q.player_answer = str(answer)
+        q.player_answer = unidecode.unidecode(str(answer)).lower()
         q.save()
         self.current_question_n=self.current_question_n+1
         self.save()
@@ -111,5 +113,4 @@ class QuestionInGame(models.Model):
     order = models.PositiveSmallIntegerField()
 
     def validate(self):
-        print(self.player_answer,'...',self.question.answer)
-        return self.player_answer == self.question.answer
+        return self.player_answer == self.question.answer.lower()
