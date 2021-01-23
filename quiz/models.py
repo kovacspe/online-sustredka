@@ -61,7 +61,6 @@ class Player(models.Model):
         for i,q in enumerate(questions):
             QuestionInGame.objects.create(order=i,question=q,game=gr)
         gr.num_questions = len(questions)
-        print('NUM Q ',len(questions))
         gr.save()
         return gr
     def __str__(self):

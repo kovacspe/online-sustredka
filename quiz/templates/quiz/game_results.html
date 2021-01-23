@@ -4,11 +4,12 @@
 
 <h3>Ahoj {{player.nickname}},</h3>
 <p>
-Získal si {{points}} z {{max_points}} bodov a tvoj čas bol {{time}} s.
+Získal si {{points}} z {{max_points}} bodov a tvoj čas bol {{game_time}}.
 </p>
 <div class='row'>
-<a class="waves-effect waves-light btn" href='/quiz/results'>Výsledky</a>
-<a class="waves-effect waves-light btn" href='/quiz/results'>nová hra</a>
+<a class="waves-effect waves-light btn" href="{% url 'quiz:results' %}">Výsledky</a>
+<a class="waves-effect waves-light btn" href="{% url 'quiz:create-game' player.id %}">Nová hra</a>
+<a class="waves-effect waves-light btn" href="{% url 'quiz:start' %}">Späť na úvod</a>
 </div>
 
 

@@ -1,10 +1,13 @@
-from django.shortcuts import render,redirect, get_object_or_404
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
+from django.shortcuts import render,redirect, get_object_or_404
+from django.utils import timezone
+from django.urls import reverse
+from django.views.generic import ListView
+
 from quiz.forms import StartForm
 from quiz import models
-from django.views.generic import ListView
-from django.core.paginator import Paginator
-from django.utils import timezone
+
 from functools import cmp_to_key
 
 class ContactList(ListView):
@@ -18,6 +21,11 @@ def question(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'quiz/list.html', {'page_obj': page_obj})
 
+def create_game(request,pk):
+    player = models.Player.objects.get(pk=pk)
+    g = player.create_game()
+    return redirect(reverse('quiz:start-game',args=[g.pk]))
+
 def start(request):
     if request.method == 'POST':
         form = StartForm(request.POST)
@@ -29,7 +37,7 @@ def start(request):
             except models.Player.DoesNotExist:
                return render(request, 'quiz/wrong_player.html', {'email': form.cleaned_data['email']})
             g = player.create_game()
-            return redirect(f'start-game/{g.pk}/')
+            return redirect(reverse('quiz:start-game',args=[g.pk]))
     else:
         form = StartForm()
 
@@ -45,7 +53,7 @@ def game(request,pk):
     if q is None:
         if gr.time is None:
             gr.evaluate()
-        return render(request,'quiz/game_results.html',{'player': gr.player,'time':gr.time,'points':gr.points,'max_points':gr.num_questions})
+        return render(request,'quiz/game_results.html',{'player': gr.player,'game_time':gr.time,'points':gr.points,'max_points':gr.num_questions})
     return render(request,'quiz/question.html',{'question_text':q.text,'pk':pk})
         
 
@@ -55,11 +63,11 @@ def start_game(request,pk):
     if request.method == 'POST':
         
         if gr.start_at is not None:
-            return redirect(f'/quiz/game/{pk}/')
+            return redirect(reverse('quiz:game',args=[pk]))
         gr.start_at = timezone.now()
         gr.current_question_n = 0
         gr.save()
-        return redirect(f'/quiz/game/{pk}/')
+        return redirect(reverse('quiz:game',args=[pk]))
     else:
         return render(request, 'quiz/instructions.html', {'player': gr.player,'pk':pk})
 

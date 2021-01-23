@@ -7,9 +7,11 @@
     {% endblock css %}
     
 </head>
-<div style='margin: 5% 10% 5% 10%;'>
-  {% block content %} 
-  {% endblock content %}
-</div>
+<body OnLoad="document.answer_form.answer.focus();">
+  <div style='margin: 5% 10% 5% 10%;'>
+    {% block content %} 
+    {% endblock content %}
+  </div>
+</body>
 {% block javascript %} 
 {% endblock javascript %}

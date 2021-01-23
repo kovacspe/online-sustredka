@@ -3,9 +3,16 @@
 {% block content %}
 
 <h3>Ahoj {{player.nickname}},</h3>
-Tu su pravidla.
-
-<form action="/quiz/start-game/{{pk}}/" method='POST'>
+<p>
+    Tento kvíz pozostáva z 20 otázok. Tvojim cieľom je umiestniť sa do 21.00 čo najvyššie v poradí.
+</p>
+<p>
+    Poradie sa zostavuje primárne podľa počtu správne zodpovedaných otázok. V prípade rovnosti rozhoduje čas, za ktorý kvíz vyplníš. V prída rovnosti času rozhoduje to, kto kedy dokončil o skoršej hodine.
+</p>
+<p>
+    Odpovedaj na otázku vždy jedným slovom alebo jedným číslom. Odpoveď potvrď buď stlačením tlačidla alebo Entrom. K zodpovedanej otázke sa už nedá vrátiť. Na konci kvízu sa dozvieš koľko odpovedí si mal/a správne. Otázky v kvíze sa menia a teda každý kvíz vyzerá trošku inak. V prípade problémov píšte na kovacs@strom.sk .
+</p>
+<form action="{% url 'quiz:start-game' pk %}" method='POST'>
     {% csrf_token %}
     <button class="waves-effect waves-light btn" type='submit'>Začni</button>
 </form>

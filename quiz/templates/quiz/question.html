@@ -3,12 +3,12 @@
 {% block content %}
 <div>
     <h2>{{question_text}}</h2>
-    <form action="/quiz/game/{{pk}}/" method="post">
+    <form name="answer_form" action="{% url 'quiz:game' pk %}" method="post">
         {% csrf_token %}
         <label for="answer">Odpoveď: </label>
         <input id="answer" type="text" name="answer" value="">
         <input class="waves-effect waves-light btn" type="submit" value="Odovzdať">
-    </form>
+        </form>
 </div>
 
 {% endblock content %}

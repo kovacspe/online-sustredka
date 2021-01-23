@@ -2,11 +2,17 @@
 {% load crispy_forms_tags %}
 {% load materializecss %}
 {% block content %}
-Vitajte na stromáckom kvíze. Zdajte svoj email pod ktorým ste sa prihlasovali na online sústredka
+<h1>STROMácky kvíz</h1>
+Vitajte na stromáckom kvíze, ktorý je súčasťou <a href="https://seminar.strom.sk/onlinestrom/">online sústredenia STROMu 2021</a>.
+<br><br>
+<a class="waves-effect waves-light btn" href="{% url 'quiz:results' %}">Aktuálne poradie</a>
+<br><br>
+<hr>
+Ak chcete začať hru, zadajte svoj email, pod ktorým ste sa prihlasovali na online sústredká.
 <form action="start" method="post">
     {% csrf_token %}
     {{ form |materializecss }}
-    <input type="submit" value="Štart">
+    <input type="submit" class="waves-effect waves-light btn" value="Štart">
 </form>
 
 {% endblock content %}
