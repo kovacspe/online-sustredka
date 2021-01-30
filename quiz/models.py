@@ -3,6 +3,10 @@ from django.utils import timezone
 import random
 import unidecode
 
+def unify(text):  
+    text = text.strip()
+    text = unidecode.unidecode(text)
+    return text.lower().replace(',','.')
 
 class QuestionTag(models.Model):
     class Meta:
@@ -21,28 +25,6 @@ class SimpleQuestion(models.Model):
     def __str__(self):
         return self.text
 
-# class Answer(models.Model):
-#     class Meta:
-#         verbose_name = 'odpoveď'
-#         verbose_name_plural = 'odpovede'
-
-#     text = models.TextField()
-#     question = models.ForeignKey('quiz.Question', on_delete=models.CASCADE)
-    
-#     def __str__(self):
-#         return self.text
-
-# class Question(models.Model):
-#     class Meta:
-#         verbose_name = 'otázka'
-#         verbose_name_plural = 'otázky'
-
-#     text = models.TextField()
-#     correct_answer = models.ForeignKey(Answer,on_delete=models.CASCADE,related_name='correct_to')
-#     tag = models.ForeignKey(QuestionTag,null=True,on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         return self.text
 
 class Player(models.Model):
     class Meta:
@@ -79,6 +61,8 @@ class GameRecord(models.Model):
     player = models.ForeignKey(Player,on_delete=models.CASCADE)
     current_question_n = models.PositiveSmallIntegerField(null=True)
     num_questions = models.PositiveSmallIntegerField(null=True)
+    def __str__(self):
+        return f'{self.player} - {self.start_at}'
 
     def current_question(self):
         if self.current_question_n>=self.num_questions:
@@ -112,4 +96,4 @@ class QuestionInGame(models.Model):
     order = models.PositiveSmallIntegerField()
 
     def validate(self):
-        return self.player_answer == self.question.answer.lower()
+        return unify(self.player_answer) == unify(self.question.answer)

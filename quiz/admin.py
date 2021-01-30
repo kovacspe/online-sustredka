@@ -17,3 +17,7 @@ class GameRecordAdmin(admin.ModelAdmin):
 @admin.register(models.QuestionInGame)
 class QuestionInGameAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(models.QuestionTag)
+class QuestionTagAdmin(admin.ModelAdmin):
+    pass

@@ -54,7 +54,7 @@ def game(request,pk):
         if gr.time is None:
             gr.evaluate()
         return render(request,'quiz/game_results.html',{'player': gr.player,'game_time':gr.time,'points':gr.points,'max_points':gr.num_questions})
-    return render(request,'quiz/question.html',{'question_text':q.text,'pk':pk})
+    return render(request,'quiz/question.html',{'question_tag':q.tag,'question_text':q.text,'pk':pk})
         
 
 

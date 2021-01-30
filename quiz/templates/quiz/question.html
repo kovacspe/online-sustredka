@@ -2,11 +2,14 @@
 
 {% block content %}
 <div>
-    <h2>{{question_text}}</h2>
+    <div class="center-div">
+        <h2 style="text-align: center;">{{question_tag}}</h2>
+    </div>
+    <h4>{{question_text |safe}}</h4>
     <form name="answer_form" action="{% url 'quiz:game' pk %}" method="post">
         {% csrf_token %}
         <label for="answer">Odpoveď: </label>
-        <input id="answer" type="text" name="answer" value="">
+        <input id="answer" type="text" name="answer" value="" autocomplete='off'>
         <input class="waves-effect waves-light btn" type="submit" value="Odovzdať">
         </form>
 </div>

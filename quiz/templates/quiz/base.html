@@ -5,7 +5,18 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
       <link rel="stylesheet" type="text/css" href="{% static 'mystyle.css' %}">
     {% endblock css %}
-    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+      </script>
 </head>
 <body OnLoad="document.answer_form.answer.focus();">
   <div style='margin: 5% 10% 5% 10%;'>
@@ -14,4 +25,5 @@
   </div>
 </body>
 {% block javascript %} 
+
 {% endblock javascript %}

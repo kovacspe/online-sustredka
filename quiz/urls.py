@@ -9,7 +9,6 @@ urlpatterns = [
     path('start-game/<int:pk>/', views.start_game, name='start-game'),
     path('game/<int:pk>/', views.game, name='game'),
     path('results', views.results, name='results'),
-    path('question', views.question, name='questions'),
     path('player-not-found', views.question, name='player-not-found')
 
 ]
