@@ -92,7 +92,7 @@ class GameRecord(models.Model):
 class QuestionInGame(models.Model):
     game = models.ForeignKey(GameRecord,on_delete=models.CASCADE,related_name='questions')
     question = models.ForeignKey(SimpleQuestion,on_delete=models.CASCADE)
-    player_answer = models.CharField(max_length=50)
+    player_answer = models.CharField(max_length=50,verbose_name='Odpoveď',blank=True)
     order = models.PositiveSmallIntegerField()
 
     def validate(self):
