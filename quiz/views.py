@@ -74,7 +74,7 @@ def start_game(request,pk):
 
 def results(request):
     # Sort by player
-    records = models.GameRecord.objects.order_by('player','-points','time','start_at')
+    records = models.GameRecord.objects.filter(time__isnull=False).order_by('player','-points','time','start_at')
     
     # Get best for every player
     result_board = []
